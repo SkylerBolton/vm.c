@@ -14,13 +14,43 @@ typedef struct Instructions
 void createAssemblyProgram(FILE *fp, instructions ins)
 {
 	printf("Line	OP	R	L	M\n");
+
+	// This is a weird way to code this. I've probably forgotten the cooler way.
+	char opArray[23][4] =
+	{
+		"000",
+		"LIT", // 1
+		"RTN", // 2
+		"LOD", // 3
+		"STO", // 4
+		"CAL", // 5
+		"INC", // 6
+		"JMP", // 7
+		"JPC", // 8
+		"SYS", // 9
+		"NEG", // 10
+		"ADD", // 11
+		"SUB", // 12
+		"MUL", // 13
+		"DIV", // 14
+		"ODD", // 15
+		"MOD", // 16
+		"EQL", // 17
+		"NEQ", // 18
+		"LSS", // 19
+		"LEQ", // 20
+		"GTR", // 21
+		"GEQ"  // 22
+	};
+
 	for(int i = 0; fscanf(fp, "%d", &ins.op) != EOF; i++)
 	{
+		// Print i and the operation code.
+		printf("%d %s", i, opArray[ins.op]);
+
 		// Print line of instructions.
-		fscanf(fp, "%d", &ins.r);
-		fscanf(fp, "%d", &ins.l);
-		fscanf(fp, "%d", &ins.m);
-		printf("%d %d %d %d %d\n", i, ins.op, ins.r, ins.l, ins.m);
+		fscanf(fp, "%d %d %d", &ins.r, &ins.l, &ins.m);
+		printf(" %d %d %d\n", ins.r, ins.l, ins.m);
 
 		// Put it into the thing for reference.
 	}
